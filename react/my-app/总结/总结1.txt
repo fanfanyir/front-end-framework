@@ -1,0 +1,32 @@
+一、
+1. immutable 的概念
+    state 不允许我们修改，如果非要改就拷贝一个副本出来改
+
+二、JSX 语法
+1. 直接写组件标签，要引入 react
+2. Fragment 相当于一个占位符
+3. dangerouslySetInnerHTML={{__html: item}}    标签的内容不转义，直接以 ’h1’ 形式显示出来,其中{__html: item}是对象，最外面的{}是语法
+4. className
+5. <label htmlFor="insertArea">输入内容：</label>
+6. 注释 {}
+
+三、组件拆分
+1.  父 -> 子：通过属性传递
+2.  子 -> 父：事件绑定，通过调用父组件传递过来的方法
+3.  绑定调用函数的 this 值到当前组件时，可以直接在构造函数中就进行绑定，这样函数的值就永远指向当前组件：this.handleClick = this.handleClick.bind(this)
+4. 子组件调用父组件的方法时一定要绑定 this 到父组件
+
+四、代码优化
+1. // const { content } = this.props;
+    // content 等价于 this.props.content
+2. this.clickHandle = this.clickHandle.bind(this)
+3. 写 map 语法又融合了逻辑，JSX 太长: 写函数返回 --getTodoItem
+4. 新版的语法里面 setState 可以接受一个函数而不是对象了,可以接收一个参数 prevState， 代表修改之前的 state
+
+五、React 思考
+1. 声明式的开发---节省 DOM 操作
+2. 可以与其他框架并存
+3. 组件化
+4. 单向数据流：子组件只能使用父组件传过来的值，不能修改，父组件的值只能在父组件进行修改。因为万一出现问题不能定位到是哪个组件修改了值 。
+5. 视图层框架：只解决数据和页面渲染，不关注组件之间传值。 Flux，Redux，Mobx 等数据层框架
+6. 函数式编程：代码的组成都是一个个函数，维护容易，便利自动化测试

@@ -1,0 +1,5 @@
+一、React-redux 核心 API:
+1. Provider --- 和 store 做了关联，内部的组件都可以获取到 store 里面的数据了
+2. connect  --- 内部的组件通过 connect 获取 store 里面的数据,
+                组件和 store 做连接，通过 mapStateToProps 映射关系做连接,通过 mapDispatchToProps 修改。
+   connect(mapStateToProps,mapDispatchToProps)(TodoList)  // 实际上是一个容器组件

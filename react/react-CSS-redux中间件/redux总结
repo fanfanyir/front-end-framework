@@ -1,0 +1,40 @@
+一、Redux 设计和使用的三项原则：
+
+1. store 是唯一的
+2. 只有 store 能够改变自己的内容
+3. Reducer 必须是纯函数：  纯函数指的是，给定固定的输入，就一定会有固定的输出，而且不会有任何副作用。
+
+二、Redux 的核心 API
+1. createStore : 帮助我们创建一个 store
+2. store.dispatch：帮助我们派发 action，这个 action 会传递给 store
+3. store.getState：帮助我们去获取到 store 里面所有的数据内容
+4. store.subScribe：订阅 store 的改变，只要 store 发生变化， subScribe 里面接收的回调函数就会发生变化。
+
+UI 组件：负责页面的渲染
+容器组件：负责页面的逻辑
+无状态组件： 一个组件只有 render 函数的时候就可以称为无状态组件
+
+三、Redux 中间件的使用：
+1. 通过 redux 创建 store 的时候去引入这些中间件
+2. 使用 Redux-thunk 中间件进行 ajax 请求发送： Redux-thunk，使我们可以在 action 中编写函数
+  (1) 安装 Redux-thunk
+  (2) 在创建 store 的时候使用这个中间件：根据官方文档做配置，通过 composeEnhancer，传入 store 的第二个参数，就可以同时使用两个中间件了
+  (3) 这时我们就可以在 action 里面写异步的代码了
+    ● 之前创建一个 action 只能是一个 js 对象，
+      但是使用了 redux-thunk 之后，即使 action 是函数，也可以通过 store.dispatch(action) 把这个函数发送给 store
+      它是怎么做的呢：实际上 store 只能接收一个 js 对象，所以当 store 发现 dispatch 接收到一个函数时,就会自动去执行这个函数
+    ● 有利于自动化测试
+3. Redux-saga：可以完全代替 redux-thunk 来做异步的处理
+  (1) 安装Redux-saga: yarn add redux-saga
+  (2) 在创建 store 的时候使用这个中间件：根据官方文档做使用配置
+      ● 引入 createSagaMiddleware ，创建一个 createSagaMiddleware
+      ● 通过 appleMiddleware 去使用这个中间件
+      ● 创建一个 sagas.js 并引入 store，通过 sagaMiddleware.run() 去运行这个文件
+  (3) 编写 saga.js
+      ● 一定要导出 generator 函数：里面根据不同类型执行不同的函数
+      ● 执行的这个函数也是 generator 函数： 去取数据，把这个数据结果再创建一个 action，派发给 store，store 再给 reducer
+
+什么是 Redux 中间件：
+1. action 和 store 中间
+2. 对 store 的 dispatch 做一个升级
+
