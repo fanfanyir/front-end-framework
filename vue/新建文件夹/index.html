@@ -8,7 +8,13 @@
   <script src="./vue.js"></script>
 </head>
 <body>
-  <div id="app"> {{content}} </div>
+  <div id="app"> 
+    <input type="text" v-model="inputValue"/>
+    <button v-on:click="handleBtnClick">提交</button>
+    <ul>
+      <li v-for="item in list">{{item}}</li>
+    </ul>
+  </div>
   <script>
   // var dom = document.getElementById('app');
   // dom.innerHTML = "hello world"
@@ -18,13 +24,20 @@
   var app = new Vue({
     el: '#app',
     data: {
-      content: 'hello world1'
+      inputValue: '',
+      list: ['hello world1']
+    },
+    methods: {
+      handleBtnClick: function (){
+        app.$data.list.push(this.inputValue);
+        this.inputValue = ''
+      }
     }
   })
 
-  setTimeout( function() {
-    app.$data.content = 'bye world'
-  }, 2000)
+  // setTimeout( function() {
+  //   app.$data.content = 'bye world'
+  // }, 2000)
   </script>
 </body>
 </html>
