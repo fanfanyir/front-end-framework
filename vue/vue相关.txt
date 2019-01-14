@@ -14,3 +14,6 @@ WEEX：使得用 vue 语法可以编写原生 app
 应用递归组件
 各种插件
 公用组件
+
+
+通过 虚拟 DOM 和 defineProperty 实现 VM 层的架构

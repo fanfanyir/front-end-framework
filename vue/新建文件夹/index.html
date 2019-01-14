@@ -12,17 +12,44 @@
     <input type="text" v-model="inputValue"/>
     <button v-on:click="handleBtnClick">提交</button>
     <ul>
-      <li v-for="item in list">{{item}}</li>
+      <todo-item v-bind:content="item" 
+                 v-bind:index="index"
+                 v-for="(item,index) in list"
+                 @delete="handleItemDelete">
+      </todo-item>
+      <!-- <todo-item2 v-bind:content="item" 
+                 v-for="item in list">
+      </todo-item2> -->
     </ul>
   </div>
   <script>
   // var dom = document.getElementById('app');
   // dom.innerHTML = "hello world"
 
+  // 全局组件
+  Vue.component("TodoItem", {
+    props: ['content', 'index'],
+    template: "<li v-on:click='handleItemClick'>{{content}}</li>",
+    methods: {
+      handleItemClick: function(){
+        this.$emit("delete", this.index)
+      }
+    }
+  })
+
+  // // 局部组件
+  // var TodoItem2 = {
+  //   props: ['content'],
+  //   template: "<li>{{content}}</li>" 
+  // }
+
   // 创建一个 vue 实例，这个实例接收一些配置项
   // el 这个配置项指的是实例负责管理的区域
   var app = new Vue({
     el: '#app',
+    // components: {
+    //   TodoItem2: TodoItem2
+    // },
     data: {
       inputValue: '',
       list: ['hello world1']
@@ -31,6 +58,9 @@
       handleBtnClick: function (){
         this.list.push(this.inputValue);
         this.inputValue = ''
+      },
+      handleItemDelete: function(index){
+        this.list.splice(index,1)
       }
     }
   })
