@@ -9,7 +9,7 @@
 </head>
 <body>
   <div id="root">
-    <counter :count='2' @change='handleChange'></counter>
+    <counter :count='2' @change='handleChange' @click.native="handleYS"></counter>
     <counter :count='2' @change='handleChange'></counter>
     <div>{{total}}</div>
   </div>
@@ -27,6 +27,9 @@
         handleClick: function() {
           this.number ++
           this.$emit('change', 1)
+        },
+        handleYS(){
+          console.log("绑定原生事件，change是自定义事件")
         }
       }
     }
