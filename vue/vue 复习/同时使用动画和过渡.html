@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>同时使用动画和过渡</title>
+  <script src="./vue.js"></script>
+  <link rel="stylesheet" type="text/css" href="./animate.css">
+  <style>
+    .fade-enter,.fade-leave-to{
+      opacity: 0;
+    }
+    .fade-enter-active,.fade-leave-active{
+      transition: opacity 4s;
+    }
+  </style>
+</head>
+<body>
+    <div id="root">
+        <!-- type="transition"  以谁的时长为准    也可以自定义动画播放时长：  :duration="1000" 执行1000毫秒 -->
+        <!-- 复杂写法 :duration="{enter:1000, leave: 1000}" -->
+        <transition 
+          type="transition"
+          
+          name="fade"
+          appear
+          enter-active-class="animated swing fade-enter-active"
+          leave-active-class="animated shake fade-leave-active"
+          appear-active-class="animated swing"
+        > 
+            <div v-if="show">hello world</div>
+        </transition>
+        <button @click='handleClick'>切换</button>
+      </div>
+      <script>
+        var vm = new Vue({
+          el:'#root',
+          data: {
+            show: true
+          },
+          methods: {
+            handleClick: function(){
+              this.show = !this.show
+            }
+          }
+    
+        })
+      </script>
+</body>
+</html>

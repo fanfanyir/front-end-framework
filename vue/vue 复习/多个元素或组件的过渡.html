@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Js动画与velocity.js</title>
+  <script src="./vue.js"></script>
+  <script src="./velocity.js"></script>
+  <style>
+     .v-enter,.v-leave-to{
+      opacity: 0;
+    }
+    .v-enter-active,.v-leave-active{
+      transition: opacity 1s;
+    }
+  </style>
+</head>
+<body>
+    <div id="root">
+        <!-- out-in  先隐藏再展示 -->
+        <!-- in-out  先展示再隐藏 -->
+      <transition mode="out-in">
+          <component :is="type"></component>
+          <!-- <div v-if="show" key="hello">hello world</div>
+          <div v-else key="bye">Bye world</div> 加 key 值防止组件服用不出现过渡效果-->
+      </transition>
+        <button @click='handleClick'>切换</button>
+      </div>
+      <script>
+        Vue.component('child',{
+          template: '<div>child</div>'
+        })
+        Vue.component('child-one',{
+          template: '<div>child-one</div>'
+        })
+        var vm = new Vue({
+          el:'#root',
+          data: {
+            type: 'child'
+          },
+          methods: {
+            handleClick: function(){
+              this.type = this.type === 'child' ? 'child-one' : 'child'
+            }
+          }
+    
+        })
+      </script>
+</body>
+</html>
