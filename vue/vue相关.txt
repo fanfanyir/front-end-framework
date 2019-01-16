@@ -17,3 +17,11 @@ WEEX：使得用 vue 语法可以编写原生 app
 
 
 通过 虚拟 DOM 和 defineProperty 实现 VM 层的架构
+
+1.使用组件的细节:
+  a. 使用 is 解决 h5 标签上的一些小 bug
+  b. 子组件里面定义 data 必须是一个函数
+  c. ref  this.$ref....
+2. 父子组件间通信：
+  a. 父 -> 子    父组件通过属性的形式向子组件传递，子组件通过 props 数组接收
+  b. 子 -> 父    子组件通过 this.$emit('change') 触发事件，父组件通过 @change 监听 change 事件。

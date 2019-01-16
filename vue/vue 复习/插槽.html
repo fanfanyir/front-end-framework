@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue 中的插槽</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <child>
+      <h2 slot='moren'>Dell</h2>
+      <!-- <div class='header' slot='header'>header</div> -->
+      <div class='footer' slot='footer'>footer</div>
+
+      // 作用域插槽
+      <template slot-scope="props">
+        <li>{{props.item}} -hello</li>
+      </template>
+    </child>
+
+    <child-one></child-one>
+    <child-two></child-two>
+    <button>change</button>
+  </div>
+  <script>
+// 作用域插槽
+// 应用场景： 子组件做循环或者某一部分的 DOM 结构应该由外部传递进来的时候，我们就需要用到作用域插槽
+    Vue.component('child-one', {
+      template: '<div>child-once</div>'
+    })
+
+    Vue.component('child-two', {
+      template:'<div>child-two</div>'
+    })
+
+    Vue.component('child', {
+      data: function(){
+        return {
+          list: [1,2,3,4]
+        }
+      },
+      template: `<div>
+                    <p>hello</p>
+                    <slot name='moren'>不写时会显示默认内容</slot>
+                    <slot name='header'>
+                      <h1>default header</h1>  
+                    </slot>
+                    <slot name='footer'></slot>
+
+                    <ul>
+                      <slot 
+                        v-for="item of list"
+                        :item=item
+                      ></slot>  
+                    </ul>
+                </div>`
+    })
+
+    var vm = new Vue({
+      el: '#root'
+    })
+  </script>
+</body>
+</html>
