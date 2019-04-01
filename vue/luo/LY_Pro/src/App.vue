@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <el-container>
+    <router-view></router-view>
+    <!-- <el-container>
       <el-header>
         <taskHead></taskHead>
       </el-header>
@@ -12,24 +13,23 @@
           <router-view></router-view>
         </el-main>
       </el-container>
-    </el-container>
+    </el-container> -->
   </div>
 </template>
 
 <script>
-import navMenu from './common/navMenu'
-import taskHead from './common/header'
+// import navMenu from './common/navMenu'
+// import taskHead from './common/header'
 export default {
   data () {
     return {
       login: 'false'
     }
   },
-  components: {
-    navMenu,
-    taskHead
-  },
-  methods: {}
+  // components: {
+  //   navMenu,
+  //   taskHead
+  // }
 }
 </script>
 
